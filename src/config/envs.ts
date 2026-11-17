@@ -13,15 +13,22 @@ interface EnVars {
     PRODUCTS_MIROSERVICE_PORT: number;
      ORDERS_MIROSERVICE_HOST: string;
     ORDERS_MIROSERVICE_PORT: number;
+    // examen 
+       client_MS_HOST: string;
+     client_MS_PORT: number;
+
 
 }
 // validador de esquema
 const envsSchema = joi.object<EnVars>({
-    PORT: joi.number().integer().min(1).max(65535).required(), 
+    PORT: joi.number().integer().min(1).max(6535).required(), 
     PRODUCTS_MIROSERVICE_HOST: joi.string().required(),
     PRODUCTS_MIROSERVICE_PORT: joi.number().required(),
     ORDERS_MIROSERVICE_HOST: joi.string().required(),
     ORDERS_MIROSERVICE_PORT: joi.number().required(),
+    //examen
+      client_MS_HOST: joi.string().required(),
+     client_MS_PORT: joi.number().required(),
 })
     .unknown(true);
 
@@ -42,6 +49,8 @@ export const envs = {
     productsMicroservicePort: envVars.PRODUCTS_MIROSERVICE_PORT,
     ordersMicroserviceHost: envVars.ORDERS_MIROSERVICE_HOST,
     ordersMicroservicePort: envVars.ORDERS_MIROSERVICE_PORT,
+        examenMicroserviceHost: envVars. client_MS_HOST,
+    examenMicroservicePort: envVars. client_MS_PORT,
 
 
 
