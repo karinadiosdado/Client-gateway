@@ -14,8 +14,8 @@ import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { PaginationDto } from '../common/dto/pagination.dto.js';
 import { CATEGORIES_SERVICE } from '../config/service.js';
 import { catchError } from 'rxjs';
-import { CreateCategoriDto } from './dto/create-categori.dto.js';
-import { UpdateCategoriDto } from './dto/update-categori.dto.js';
+import { CreateCategoryDto } from './dto/create-category.dto.js';
+import { UpdateCategoryDto } from './dto/update-category.dto.js';
 
 @Controller('categories')
 export class CategoriesController {
@@ -24,7 +24,7 @@ export class CategoriesController {
   ) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoriDto) {
+  create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoriesClient
       .send({ cmd: 'create_category' }, createCategoryDto)
       .pipe(
@@ -59,10 +59,10 @@ export class CategoriesController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCategoryDto: UpdateCategoriDto,
+    @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
     return this.categoriesClient
-.send({ cmd: 'update_category' }, { ...updateCategoryDto, id })
+      .send({ cmd: 'update_category' }, { ...updateCategoryDto, id })
       .pipe(
         catchError((err) => {
           throw new RpcException(err);

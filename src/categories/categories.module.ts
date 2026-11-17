@@ -11,8 +11,8 @@ import { envs } from '../config/envs.js';
         name: CATEGORIES_SERVICE,
         transport: Transport.TCP,
         options: {
-          host: envs.examenMicroserviceHost,
-          port: envs.examenMicroservicePort,
+          host: envs.categoriesMicroserviceHost,
+          port: envs.categoriesMicroservicePort,
         },
       },
     ]),

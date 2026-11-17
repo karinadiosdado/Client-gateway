@@ -1,57 +1,47 @@
-// @prefix micro-envs
-// @description 
-/* eslint-disable */
-
-
 import 'dotenv/config';
 import joi from 'joi';
 
-
 interface EnVars {
-    PORT: number;
-    PRODUCTS_MIROSERVICE_HOST: string;
-    PRODUCTS_MIROSERVICE_PORT: number;
-     ORDERS_MIROSERVICE_HOST: string;
-    ORDERS_MIROSERVICE_PORT: number;
-    // examen 
-       client_MS_HOST: string;
-     client_MS_PORT: number;
-
-
+  PORT: number;
+  PRODUCTS_MIROSERVICE_HOST: string;
+  PRODUCTS_MIROSERVICE_PORT: number;
+  ORDERS_MIROSERVICE_HOST: string;
+  ORDERS_MIROSERVICE_PORT: number;
+  CATEGORIES_MS_HOST: string;
+  CATEGORIES_MS_PORT: number;
+  CLIENTS_MS_HOST: string;
+  CLIENTS_MS_PORT: number;
 }
-// validador de esquema
-const envsSchema = joi.object<EnVars>({
-    PORT: joi.number().integer().min(1).max(6535).required(), 
+
+const envsSchema = joi
+  .object<EnVars>({
+    PORT: joi.number().integer().min(1).max(65535).required(),
     PRODUCTS_MIROSERVICE_HOST: joi.string().required(),
     PRODUCTS_MIROSERVICE_PORT: joi.number().required(),
     ORDERS_MIROSERVICE_HOST: joi.string().required(),
     ORDERS_MIROSERVICE_PORT: joi.number().required(),
-    //examen
-      client_MS_HOST: joi.string().required(),
-     client_MS_PORT: joi.number().required(),
-})
-    .unknown(true);
+    CATEGORIES_MS_HOST: joi.string().required(),
+    CATEGORIES_MS_PORT: joi.number().required(),
+    CLIENTS_MS_HOST: joi.string().required(),
+    CLIENTS_MS_PORT: joi.number().required(),
+  })
+  .unknown(true);
 
+const result = envsSchema.validate(process.env, { abortEarly: false });
 
-const result = envsSchema.validate(process.env, { abortEarly: false });// reporta errores que pueda tener 
-
-// validar si llega un error 
 if (result.error) {
-    throw new Error(`Config validation error: ${result.error.message}`);
+  throw new Error(`Config validation error: ${result.error.message}`);
 }
 const envVars = result.value;
 
-
-// variable de entorno puerto
 export const envs = {
-    port: envVars.PORT,
-    productsMicroserviceHost: envVars.PRODUCTS_MIROSERVICE_HOST,
-    productsMicroservicePort: envVars.PRODUCTS_MIROSERVICE_PORT,
-    ordersMicroserviceHost: envVars.ORDERS_MIROSERVICE_HOST,
-    ordersMicroservicePort: envVars.ORDERS_MIROSERVICE_PORT,
-        examenMicroserviceHost: envVars. client_MS_HOST,
-    examenMicroservicePort: envVars. client_MS_PORT,
-
-
-
-} as const;// solo lectura 
+  port: envVars.PORT,
+  productsMicroserviceHost: envVars.PRODUCTS_MIROSERVICE_HOST,
+  productsMicroservicePort: envVars.PRODUCTS_MIROSERVICE_PORT,
+  ordersMicroserviceHost: envVars.ORDERS_MIROSERVICE_HOST,
+  ordersMicroservicePort: envVars.ORDERS_MIROSERVICE_PORT,
+  categoriesMicroserviceHost: envVars.CATEGORIES_MS_HOST,
+  categoriesMicroservicePort: envVars.CATEGORIES_MS_PORT,
+  clientsMicroserviceHost: envVars.CLIENTS_MS_HOST,
+  clientsMicroservicePort: envVars.CLIENTS_MS_PORT,
+} as const;

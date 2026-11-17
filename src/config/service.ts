@@ -1,3 +1,4 @@
-export const  PRODUCT_SERVICE = 'PRODUCT_SERVICE';
-export const  ORDERS_SERVICE = 'ORDERS_SERVICE';
-export const  client_SERVICE = ' client_SERVICE';
+export const PRODUCT_SERVICE = 'PRODUCT_SERVICE';
+export const ORDERS_SERVICE = 'ORDERS_SERVICE';
+export const CATEGORIES_SERVICE = 'CATEGORIES_SERVICE';
+export const CLIENTS_SERVICE = 'CLIENTS_SERVICE';
